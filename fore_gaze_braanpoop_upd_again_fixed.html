@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BRAANPOOP 1.0</title>
+    <style>
+        body {
+            background-color: #808080;
+            margin: 0;
+            height: 100vh;
+            position: relative;
+            font-family: "Comic Sans MS", sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: brown;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 5vw;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .center-img, .button-img, .right-img {
+            position: absolute;
+            cursor: pointer;
+        }
+        .center-img { 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 50%; 
+            height: auto; 
+        }
+        .right-img {
+            top: 50%;
+            left: 62%; /* to the right of center image */
+            transform: translate(-50%, -50%);
+            max-width: 40%;
+            height: auto;
+        }
+        .button-img { 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 30%; 
+            height: auto; 
+        }
+        .not-available-text {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: black;
+            font-size: 3vw;
+            white-space: nowrap;
+            font-family: "Comic Sans MS", sans-serif;
+        }
+        .fade-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #808080; /* start as gray */
+            opacity: 0;
+            z-index: 1000;
+            transition: opacity 1s linear, background-color 1s linear;
+        }
+        .fade-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8vw;
+            color: white;
+            font-family: "Comic Sans MS", sans-serif;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            z-index: 1001;
+        }
+        video.fullscreen-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<h1>braanpoop&trade; 1.0 YAY</h1>
+
+<img src="SIENCEbp.png" alt="Science Image" class="center-img" onclick="showSienceVids()">
+<img src="fore_gaze_bp.png" alt="Fore Gaze Image" class="right-img" onclick="jokeSubject()">
+
+<script>
+function showSienceVids() {
+    document.body.innerHTML = '';
+    document.body.style.backgroundColor = 'white';
+
+    let title = document.createElement('h1');
+    title.innerText = 'SIENCE VIDS';
+    title.style.color = 'black';
+    title.style.position = 'absolute';
+    title.style.top = '10px';
+    title.style.left = '50%';
+    title.style.transform = 'translateX(-50%)';
+    title.style.fontSize = '5vw';
+    title.style.whiteSpace = 'nowrap';
+    title.style.fontFamily = '"Comic Sans MS", sans-serif';
+    document.body.appendChild(title);
+
+    let button = document.createElement('img');
+    button.src = 'VNBP.png';
+    button.alt = 'Button Image';
+    button.className = 'button-img';
+    document.body.appendChild(button);
+
+    let notAvailable = document.createElement('div');
+    notAvailable.innerText = 'not available sorry :(';
+    notAvailable.className = 'not-available-text';
+    document.body.appendChild(notAvailable);
+
+    button.onclick = function() {
+        button.remove();
+        notAvailable.remove();
+
+        let video = document.createElement('video');
+        video.src = 'vorrath_nyxshade_braanpoop.mp4';
+        video.className = 'fullscreen-video';
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.controls = true;
+        document.body.appendChild(video);
+
+        video.addEventListener('click', () => { video.muted = false; });
+    };
+}
+
+// Function for clicking fore_gaze_bp.png
+function jokeSubject() {
+    // Create fade screen
+    let fade = document.createElement('div');
+    fade.className = 'fade-screen';
+    document.body.appendChild(fade);
+
+    // Create the text but keep hidden initially
+    let text = document.createElement('div');
+    text.className = 'fade-text';
+    text.innerText = 'JOKE SUBJECT!!';
+    document.body.appendChild(text);
+
+    // Step 1: Fade screen to white
+    fade.style.backgroundColor = 'white';
+    fade.style.opacity = 1;
+
+    // Step 2: Wait for fade to white to finish (~1s), then fade to red
+    setTimeout(() => {
+        fade.style.backgroundColor = 'red';
+        // Step 3: Show the text after fade to red
+        setTimeout(() => {
+            text.style.opacity = 1;
+        }, 1000); // wait 1s for red fade
+    }, 1000); // initial white fade duration
+}
+</script>
+
+</body>
+</html>
